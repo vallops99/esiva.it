@@ -1,0 +1,15 @@
+FROM nginx:1.17-alpine
+
+ENV AUTHOR valerio.farrotti@gmail.com
+ENV UPDATED 20210603
+
+RUN apk add yarn
+
+RUN rm /etc/nginx/conf.d/default.conf
+ADD etc/ /etc/nginx/conf.d/
+
+ADD static/ /usr/src/app/static/
+
+WORKDIR /usr/src/app/static/
+
+RUN yarn install

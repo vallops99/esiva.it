@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block head %}
+  <script src='https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.js'></script>
+  <link href='https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.css' rel='stylesheet' />
+{% endblock %}
+
+{% block content %}
+  <main role="main" class="flex-shrink-0" id="homepage">
+    <div id='map' class="vw-100"></div>
+  </main>
+{% endblock %}

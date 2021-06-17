@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% load context_tags %}
+
+{% block content %}
+  {% message_kind kind_of_messages as messages %}
+  <div class='container-fluid h-75 p-3'>
+    {% for message in messages %}
+      <div class='message-container d-flex flex-column align-items-start w-80
+        {% if forloop.counter|divisibleby:2 %}
+          align-items-end
+        {% endif %}'>
+        {{ message.title }}
+        {{ message.text }}
+        {{ message.user }}
+        {{ message.email }}
+      </div>
+    {% endfor %}
+  </div>
+  {% include 'includes/create_message.html' %}
+{% endblock %}
