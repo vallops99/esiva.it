@@ -1,0 +1,97 @@
+version: "3.7"
+
+services:
+  web:
+    image: valeriodocker/esivait_web:latest
+
+    volumes:
+      - ./web:/usr/src/app
+
+    expose:
+      - "8000"
+
+    networks:
+      - esiva_network
+      - redis_network
+
+    env_file:
+      - .prod-env
+
+    stdin_open: true
+    tty: true
+
+    restart: always
+
+    command: ./run_django.sh
+
+  nginx:
+    image: valeriodocker/esivait_nginx:latest
+
+    depends_on:
+      - web
+
+    ports:
+      - "80:80"
+
+    volumes:
+      - ./nginx/static:/usr/src/app/static
+      - ./web/media:/usr/src/app/media
+
+    networks:
+      - esiva_network
+
+    restart: always
+
+  postgres:
+    image: postgres
+
+    env_file:
+      - .env
+
+    expose:
+      - "5432"
+
+    volumes:
+      - esiva-pgdata:/var/lib/postgresql/data
+
+    tty: true
+    stdin_open: true
+
+    networks:
+      - esiva_network
+
+    restart: always
+
+  redis:
+    image: valeriodocker/esivait_redis:latest
+    privileged: true
+
+    expose:
+      - "6379"
+
+    networks:
+      - redis_network
+
+    restart: always
+
+    command: "./run_redis.sh"
+
+  redisCommander:
+    image: rediscommander/redis-commander:latest
+
+    environment:
+      - REDIS_HOSTS=local:redis:6379
+
+    networks:
+      - redis_network
+    ports:
+      - "8081:8081"
+
+    restart: always
+
+networks:
+  esiva_network:
+  redis_network:
+
+volumes:
+  esiva-pgdata:

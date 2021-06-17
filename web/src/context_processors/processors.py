@@ -11,7 +11,6 @@ def process_context(request):
 
     road_key = 'esiva.it/roads'
     road = cache.get(road_key, None)
-    road = None
     if road is None:
         road_query = Location.objects.all().order_by('created_at')
 
