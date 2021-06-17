@@ -22,7 +22,7 @@ services:
 
     restart: always
 
-    command: ./run_django.sh
+    command: "./run_django.sh"
 
   nginx:
     image: valeriodocker/esivait_nginx:latest
