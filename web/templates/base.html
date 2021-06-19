@@ -44,7 +44,6 @@
 {% endblock %}
 
 <script>
-  mapboxgl.accessToken = "{{ MAPBOX_TOKEN }}";
   window.locations = JSON.parse('{{ LOCATIONS|safe }}');
   window.road = JSON.parse('{{ ROAD|safe }}');
 </script>

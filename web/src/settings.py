@@ -98,16 +98,29 @@ else:
         }
     }
 
-CACHES = {
-    'default': {
-        'BACKEND': 'django_redis.cache.RedisCache',
-        'LOCATION': 'redis://redis:6379/0'
-    },
-    'context-processor': {
-        'BACKEND': 'django_redis.cache.RedisCache',
-        'LOCATION': 'redis://redis:6379/1'
+if os.getenv('CACHE') in ['True', 'true']:
+    CACHES = {
+        'default': {
+            'BACKEND': 'django_redis.cache.RedisCache',
+            'LOCATION': 'redis://redis:6379/0'
+        }
     }
+
+    CACHE_TTL = 3600
+else:
+    CACHES = {
+        'default': {
+            'BACKEND': "django.core.cache.backends.dummy.DummyCache"
+        }
+    }
+
+    CACHE_TTL = 0
+
+CACHES['context-processor'] = {
+    'BACKEND': 'django_redis.cache.RedisCache',
+    'LOCATION': 'redis://redis:6379/1'
 }
+
 
 
 # Password validation
@@ -127,6 +140,8 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+LOGIN_URL = '/5301fs/'
 
 
 # Internationalization

@@ -19,7 +19,8 @@ from .views import (
     homepage,
     bok_board,
     planet_board,
-    store_coordinates
+    store_coordinates,
+    invalidate_cache
 )
 
 urlpatterns = [
@@ -29,5 +30,6 @@ urlpatterns = [
     path('bacheca-ambiente', planet_board, name='planet-board'),
 
     # API urls
-    path('api/store-coordinates', store_coordinates, name='store-coordinates')
+    path('api/store-coordinates', store_coordinates, name='store-coordinates'),
+    path('api/invalidate-cache', invalidate_cache, name='invalidate-cache')
 ]

@@ -12,3 +12,13 @@ def message_kind(context, kind):
             messages = context.get('PLANET_MESSAGES', None)
 
     return messages
+
+@register.simple_tag()
+def url_name(kind):
+    name = None
+    if kind:
+        if kind == 'bok':
+            name = 'bok-board'
+        else:
+            name = 'planet-board'
+    return name

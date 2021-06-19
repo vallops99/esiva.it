@@ -13,3 +13,5 @@ ADD static/ /usr/src/app/static/
 WORKDIR /usr/src/app/static/
 
 RUN yarn install
+
+WORKDIR /usr/src/app/

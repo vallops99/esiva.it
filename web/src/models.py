@@ -26,7 +26,6 @@ def location_post_save(sender, instance, **kwargs):
     caches['context-processor'].clear()
 
 class Message(models.Model):
-    title = models.CharField(max_length=100, blank=True, null=True)
     text = models.CharField(max_length=500, blank=True, null=True)
 
     kind_of = models.CharField(max_length=6, choices=[
@@ -42,7 +41,7 @@ class Message(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
 
     def __str__(self):
-        return self.title
+        return self.user
 
 @receiver(post_save, sender=Message)
 def message_post_save(sender, instance, **kwargs):

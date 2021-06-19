@@ -1,13 +1,26 @@
-<div class='container-fluid create-message-box-container h-25 p-3 fixed-bottom'>
-  <div class='input-group create-message-box'>
-    <label for='titleInput'>Title</label>
-    <input type='text' class='form-control create-message-title' placeholder='Titolo del tuo messaggio...' aria-label='Title' id='titleInput'/>
-    <label for='messageInput'>Message</label>
-    <textarea class='form-control create-message-text' aria-label='Il tuo messaggio...' id='messageInput'></textarea>
-    <label for='usernameInput'>Username</label>
-    <input type='text' class='form-control create-message-username' placeholder='Username che vuoi mostrare...' aria-label='Username' id='usernameInput'/>
-    <label for='emailInput'>Email</label>
-    <input type='email' class='form-control create-message-email' placeholder='Email dove ti possiamo contattare...' aria-label='Email' aria-describedby='emailHelp' id='emailInput'/>
-    <small id="emailHelp" class="form-text text-muted">Non condivideremo mai la tua mail.</small>
-  </div>
+{% load context_tags %}
+
+{% url_name kind_of_messages as board_url %}
+<div class='container-fluid position-fixed fixed-bottom create-message-box-container p-3 fixed-bottom create-message-container'>
+  <form action="{% url board_url %}" method="POST">
+    {% csrf_token %}
+    <div class='form-group create-message-box'>
+      <label for='messageInput'>Message</label>
+      <textarea class='form-control create-message-text' name='messageInput' aria-label='Il tuo messaggio...' id='messageInput' required></textarea>
+    </div>
+    <div class="d-flex">
+      <div class='form-group create-message-box pr-2 w-50'>
+        <label for='usernameInput'>Username</label>
+        <input type='text' class='form-control create-message-username' name='username' placeholder='Username che vuoi mostrare...' aria-label='Username' id='usernameInput' required/>
+      </div>
+      <div class='form-group create-message-box pl-2 pr-2 w-50'>
+        <label for='emailInput'>Email</label>
+        <input type='email' class='form-control create-message-email' name='email' placeholder='Email dove ti possiamo contattare...' aria-label='Email' aria-describedby='emailHelp' id='emailInput' required/>
+      </div>
+      <input type='hidden' name='board' value='{{ kind_of_messages }}'/>
+      <div class="form-group align-self-end fit-content">
+        <button type="submit" class="btn btn-primary pl-2">Invia</button>
+      </div>
+    </div>
+  </form>
 </div>

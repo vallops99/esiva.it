@@ -7,7 +7,7 @@ from src.models import Location, Message
 def process_context(request):
 
     cache = caches['context-processor']
-    cache_timeout = 3600
+    cache_timeout = getattr(settings, 'CACHE_TTL', 3600)
 
     road_key = 'esiva.it/roads'
     road = cache.get(road_key, None)
