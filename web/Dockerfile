@@ -2,8 +2,6 @@ FROM python:3-alpine
 
 ENV AUTHOR valerio.farrotti@gmail.com
 ENV UPDATED 20210607
-ENV PYTHONPATH "${PYTHONPATH}:/app"
-ENV PATH "${PATH}:/app"
 
 WORKDIR /usr/src/app/
 

@@ -15,10 +15,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from .views import (
+from app.views import (
     homepage,
-    bok_board,
-    planet_board,
+    map,
+    map_bok,
+    martesana_page,
+    thought_board,
+    eugenio_dog_life,
+    donation,
+    about_me,
+    partners,
     store_coordinates,
     invalidate_cache
 )
@@ -26,8 +32,18 @@ from .views import (
 urlpatterns = [
     path('5301fs/', admin.site.urls),
     path('', homepage, name='homepage'),
-    path('bacheca-bok', bok_board, name='bok-board'),
-    path('bacheca-ambiente', planet_board, name='planet-board'),
+
+    path('mappa', map, name='map'),
+    path('dove-sei-bok', map_bok, name='map-bok'),
+
+    path('martesana-racconta', martesana_page, name='martesana-page'),
+
+    path('bacheca-pensieri', thought_board, name='thought-board'),
+    path('dai-vita-eugenio-cane', eugenio_dog_life, name='eugenio-dog-life'),
+
+    path('donazioni', donation, name='donation'),
+    path('about-me', about_me, name='about-me'),
+    path('partners', partners, name='partners'),
 
     # API urls
     path('api/store-coordinates', store_coordinates, name='store-coordinates'),

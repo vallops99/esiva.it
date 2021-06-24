@@ -7,6 +7,7 @@ RUN apk add yarn
 
 RUN rm /etc/nginx/conf.d/default.conf
 ADD etc/ /etc/nginx/conf.d/
+ADD .cert/ /etc/nginx/
 
 ADD static/ /usr/src/app/static/
 

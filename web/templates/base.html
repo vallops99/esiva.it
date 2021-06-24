@@ -43,9 +43,4 @@
 {% block script %}
 {% endblock %}
 
-<script>
-  window.locations = JSON.parse('{{ LOCATIONS|safe }}');
-  window.road = JSON.parse('{{ ROAD|safe }}');
-</script>
-
 <script src="{% static 'js/esiva.js' %}"></script>

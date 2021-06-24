@@ -1,22 +1,60 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="{% url 'homepage' %}">ESIVA</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+{% load static %}
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light p-0">
+  <a class="navbar-brand p-0" href="{% url 'homepage' %}">
+    <img src="{% static 'images/logo-bok.png' %}" width="56" height="56" alt="">
+  </a>
+  <button class="navbar-toggler mr-2" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+  <div class="collapse navbar-collapse p-2" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'bok-board' %}">Bacheca Bok</a>
+
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarMapDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Mappe
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarMapDropdown">
+          <a class="dropdown-item" href="{% url 'map-bok' %}">Dove sei Bok?</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="{% url 'map' %}">Viaggio</a>
+        </div>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'planet-board' %}">Bacheca Ambiente</a>
+
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarBoardDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Bacheche
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarBoardDropdown">
+          <a class="dropdown-item" href="{% url 'thought-board' %}">La bacheca dei pensieri</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="{% url 'eugenio-dog-life' %}">Dai vita ad Eugenio Cane</a>
+        </div>
       </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'martesana-page' %}">La Martesana racconta</a>
+      </li>
+
     </ul>
     <ul class="navbar-nav ml-auto">
-      <li class="nav-item">
-        <a class="nav-link" href="#">Donazioni</a>
+
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarInfoDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Info
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarInfoDropdown">
+          <a class="dropdown-item" href="{% url 'about-me' %}">About me</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="{% url 'partners' %}">Partners</a>
+        </div>
       </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'donation' %}">Donazioni</a>
+      </li>
+
     </ul>
   </div>
 </nav>

@@ -5,6 +5,7 @@ services:
     image: valeriodocker/esivait_web:latest
 
     volumes:
+      - ./app:/app
       - media:/usr/src/app/media
 
     expose:
@@ -32,6 +33,7 @@ services:
 
     ports:
       - "80:80"
+      - "443:443"
 
     volumes:
       - media:/usr/src/app/media
@@ -75,18 +77,18 @@ services:
 
     command: "./run_redis.sh"
 
-  redisCommander:
-    image: rediscommander/redis-commander:latest
-
-    environment:
-      - REDIS_HOSTS=local:redis:6379
-
-    networks:
-      - redis_network
-    ports:
-      - "8081:8081"
-
-    restart: always
+  # redisCommander:
+  #   image: rediscommander/redis-commander:latest
+  #
+  #   environment:
+  #     - REDIS_HOSTS=local:redis:6379
+  #
+  #   networks:
+  #     - redis_network
+  #   ports:
+  #     - "8081:8081"
+  #
+  #   restart: always
 
 networks:
   esiva_network:

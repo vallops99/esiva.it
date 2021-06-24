@@ -10,4 +10,4 @@ COPY docker-healthcheck.sh /usr/local/bin/
 
 COPY run_redis.sh /run_redis.sh
 
-HEALTHCHECK CMD ["/usr/local/bin/docker-healtcheck.sh"]
+HEALTHCHECK CMD ["/usr/local/bin/docker-healthcheck.sh"]

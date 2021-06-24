@@ -3,9 +3,8 @@
 {% load context_tags %}
 
 {% block content %}
-  {% message_kind kind_of_messages as messages %}
   <div class='container-fluid h-100 p-3 board-page'>
-    {% for message in messages %}
+    {% for message in THOUGHT_MESSAGES %}
       <div class='message-container d-flex flex-column w-80
         {% if forloop.counter|divisibleby:2 %}
           align-items-end
@@ -15,11 +14,15 @@
         <div class="pt-2">
           {{ message.text }}
         </div>
-        <div class="pt-2">
+        <div class="font-weight-light pt-2">
           {{ message.user }}
         </div>
       </div>
     {% endfor %}
   </div>
   {% include 'includes/create_message.html' %}
+
+  {% if form_response %}
+    {% include 'includes/modals/form_response.html' %}
+  {% endif %}
 {% endblock %}

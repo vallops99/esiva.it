@@ -25,16 +25,13 @@ class Location(models.Model):
 def location_post_save(sender, instance, **kwargs):
     caches['context-processor'].clear()
 
+
 class Message(models.Model):
     text = models.CharField(max_length=500, blank=True, null=True)
 
-    kind_of = models.CharField(max_length=6, choices=[
-        ('planet', 'planet'),
-        ('bok', 'bok')
-    ], default='bok')
-
     user = models.CharField(max_length=50, blank=True, null=True)
-    email = models.CharField(max_length=64, blank=True, null=True)
+
+    age = models.IntegerField(blank=True, null=True)
 
     is_reviewed = models.BooleanField(default=False)
 
@@ -42,6 +39,18 @@ class Message(models.Model):
 
     def __str__(self):
         return self.user
+
+@receiver(post_save, sender=Message)
+def message_post_save(sender, instance, **kwargs):
+    caches['context-processor'].clear()
+
+
+class JournalArticle(models.Model):
+    title = models.CharField(max_length=100, blank=True, null=True)
+
+    text = models.TextField(null=True, blank=True)
+
+    created_at = models.DateTimeField(auto_now_add=True, editable=False)
 
 @receiver(post_save, sender=Message)
 def message_post_save(sender, instance, **kwargs):

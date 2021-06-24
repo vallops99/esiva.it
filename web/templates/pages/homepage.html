@@ -1,20 +1,20 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block head %}
-  <script src='https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.js'></script>
-  <link href='https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.css' rel='stylesheet' />
-{% endblock %}
-
 {% block content %}
-  <main role="main" class="flex-shrink-0" id="homepage">
-    <div id='map' class="vw-100"></div>
-  </main>
-{% endblock %}
+  <div class="homepage-container">
+    <div class="background-image-container">
+      <img class="background-image" src="{% static 'images/background-world-map.jpeg' %}"/>
+    </div>
+    <div class="container d-flex flex-column justify-content-center align-items-center content-container">
+      <div class="content-title text-center p-3">
+        <h2>E SI VA!<br/>Pedalando con Eugenio Cane</h2>
+      </div>
+      <div class="content-description text-center p-3">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent quis libero sit amet nulla tincidunt efficitur. Fusce eleifend lorem sed arcu laoreet condimentum. Nam tincidunt massa laoreet, luctus leo sed, pellentesque massa. Donec ex elit, finibus at malesuada in, imperdiet nec neque. Quisque sit amet arcu in libero scelerisque gravida sed sit amet ante. Suspendisse vel luctus nisl. Duis id vestibulum lorem, et tincidunt sem. Donec nec leo vitae ipsum ullamcorper porttitor a nec nulla.
+      </div>
+    </div>
 
-{% block script %}
-  <script>
-    mapboxgl.accessToken = "{{ MAPBOX_TOKEN }}";
-  </script>
-  <script src="{% static 'js/homepage.js' %}"></script>
+    {% include 'includes/fly-logo.html' %}
+  </div>
 {% endblock %}
