@@ -21,7 +21,7 @@ def process_context(request):
             road.append([point.coordinate_y, point.coordinate_x])
 
         if len(road):
-            live_point = road.first();
+            live_point = road[-1]
         else:
             live_point = []
 
