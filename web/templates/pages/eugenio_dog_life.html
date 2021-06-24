@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+  <div class="container dog-life-container d-flex flex-column justify-content-around align-items-center">
+    <div class="dog-life-register">
+      <h3 class="pb-3 text-center">Clicca sull'icona per registrare un audio e nel prossimo video potresti essere te a dare voce ad Eugenio Cane!</h3>
+      <div class="dog-life-mic text-center mt-3">
+        {% include 'includes/svg/microphone.svg' %}
+      </div>
+      <p class="dog-life-time-passed text-center"></p>
+      <div class="dog-life-media-buttons w-100 d-flex justify-content-center mt-3">
+        <button type="button" class="btn btn-light d-none dog-life-play mr-3">Ascolta</button>
+        <button type="button" class="btn btn-light d-none dog-life-pause mr-3">Stop</button>
+        <button type="button" class="btn btn-danger d-none dog-life-cancel mr-3">Elimina</button>
+        <button type="button" class="btn btn-primary d-none dog-life-send">Invia Audio</button>
+      </div>
+    </div>
+    <div class="dog-life-separator">
+      <h3>Oppure</h3>
+    </div>
+    <div class="dog-life-upload">
+      <h3 class="pb-3 text-center">Carica un file audio che hai già registrato.</h3>
+      <div class="dog-life-upload d-flex flex-column text-center mt-3">
+        <div class="dog-life-input-container">
+          <input type="file" id="myFile" name="filename" class="btn btn-primary">
+        </div>
+        <div class="dog-life-send-uploaded-container">
+          <button type="button" class="btn btn-primary dog-life-send-uploaded mt-3">Invia audio caricato</button>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block script %}
+  <script src="{% static 'js/eugenio_dog_life.js' %}"></script>
+{% endblock %}

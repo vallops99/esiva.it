@@ -25,6 +25,7 @@ class Location(models.Model):
 @receiver(post_save, sender=Location)
 def location_post_save(sender, instance, **kwargs):
     caches['context-processor'].clear()
+    caches['default'].clear()
 
 
 class Message(models.Model):
@@ -44,6 +45,7 @@ class Message(models.Model):
 @receiver(post_save, sender=Message)
 def message_post_save(sender, instance, **kwargs):
     caches['context-processor'].clear()
+    caches['default'].clear()
 
 
 class JournalArticle(models.Model):
@@ -61,3 +63,4 @@ class JournalArticle(models.Model):
 @receiver(post_save, sender=Message)
 def message_post_save(sender, instance, **kwargs):
     caches['context-processor'].clear()
+    caches['default'].clear()

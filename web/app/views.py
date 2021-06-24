@@ -41,7 +41,7 @@ def martesana_page(request):
 @cache_page(CACHE_TTL)
 def eugenio_dog_life(request):
     if request.method == 'GET':
-        return render(request, 'pages/homepage.html', {})
+        return render(request, 'pages/eugenio_dog_life.html', {})
     return HttpResponseBadRequest('Method not allowed')
 
 @cache_page(CACHE_TTL)
@@ -100,7 +100,7 @@ def store_coordinates(request):
                     coordinate_y=longitude
                 )
 
-                return HttpResponse("ok")
+                return HttpResponse('ok')
         return HttpResponseBadRequest('Something wrong happend or has been sent')
     return HttpResponseBadRequest('Method not allowed')
 
@@ -109,4 +109,10 @@ def invalidate_cache(request):
     if request.method == 'GET':
         cache.clear()
         return HttpResponse("ok")
+    return HttpResponseBadRequest('Method not allowed')
+
+def store_audio(request):
+    if request.method == 'POST':
+        console.log(request.body)
+        return JsonResponse('ok')
     return HttpResponseBadRequest('Method not allowed')

@@ -26,7 +26,8 @@ from app.views import (
     about_me,
     partners,
     store_coordinates,
-    invalidate_cache
+    invalidate_cache,
+    store_audio
 )
 
 urlpatterns = [
@@ -47,5 +48,6 @@ urlpatterns = [
 
     # API urls
     path('api/store-coordinates', store_coordinates, name='store-coordinates'),
-    path('api/invalidate-cache', invalidate_cache, name='invalidate-cache')
+    path('api/invalidate-cache', invalidate_cache, name='invalidate-cache'),
+    path('api/store-audio', store_audio, name='store-audio')
 ]

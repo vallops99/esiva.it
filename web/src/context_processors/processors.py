@@ -14,7 +14,7 @@ def process_context(request):
     live_point = cache.get(live_point_key, None)
     road = cache.get(road_key, None)
     if road is None or live_point is None:
-        road_query = Location.objects.all().order_by('-created_at')
+        road_query = Location.objects.all().order_by('created_at')
 
         road = []
         for point in road_query:
