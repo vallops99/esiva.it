@@ -5,7 +5,7 @@ services:
     build: ./web
 
     volumes:
-      - ./app:/app
+      - ./web:/usr/src/app
       - media:/usr/src/app/media
 
     expose:

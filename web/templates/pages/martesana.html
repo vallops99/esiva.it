@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+  <div class='container martesana-container'>
+    <div class='martesana-logo p-3 mt-3'>
+      {% include 'includes/svg/logo-martesana.svg' %}
+    </div>
+    {% if ARTICLE %}
+      <div class='martesana-title mt-3 text-left'>
+        <h1>{{ ARTICLE.title }}</h1>
+      </div>
+      {% if ARTICLE.image %}
+        <div class='martesana-image-container mt-2'>
+          <img src='{{ ARTICLE.image.url }}' class='martesana-image w-100'/>
+        </div>
+      {% endif %}
+      <div class='martesana-text mt-2 text-left flex-grow-1'>
+        {{ ARTICLE.content|safe }}
+      </div>
+    {% endif %}
+  </div>
+{% endblock %}

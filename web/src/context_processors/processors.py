@@ -2,7 +2,7 @@ from django.conf import settings
 from django.core.cache import caches
 import json
 
-from app.models import Location, Message
+from app.models import Location, Message, JournalArticle
 
 def process_context(request):
 
@@ -13,7 +13,6 @@ def process_context(request):
     live_point_key = 'esiva.it/live-point'
     live_point = cache.get(live_point_key, None)
     road = cache.get(road_key, None)
-    road = None
     if road is None or live_point is None:
         road_query = Location.objects.all().order_by('-created_at')
 
@@ -22,7 +21,7 @@ def process_context(request):
             road.append([point.coordinate_y, point.coordinate_x])
 
         if len(road):
-            live_point = road[-1]
+            live_point = road.first();
         else:
             live_point = []
 
@@ -51,10 +50,21 @@ def process_context(request):
 
         cache.set(thought_messages_key, thought_messages, timeout=cache_timeout)
 
+    article_key = 'esiva.it/article'
+    article = cache.get(article_key, None)
+    if article is None:
+        try:
+            article = JournalArticle.objects.latest('id')
+        except:
+            article = None
+
+        cache.set(article_key, article, timeout=cache_timeout)
+
     return {
         'MAPBOX_TOKEN': settings.MAPBOX_TOKEN,
         'LIVE_POINT': live_point,
         'LOCATIONS': locations,
         'ROAD': road,
         'THOUGHT_MESSAGES': thought_messages,
+        'ARTICLE': article
     }

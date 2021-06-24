@@ -35,7 +35,7 @@ def map_bok(request):
 @cache_page(CACHE_TTL)
 def martesana_page(request):
     if request.method == 'GET':
-        return render(request, 'pages/homepage.html', {})
+        return render(request, 'pages/martesana.html', {})
     return HttpResponseBadRequest('Method not allowed')
 
 @cache_page(CACHE_TTL)

@@ -1,4 +1,5 @@
 from django.db import models
+from ckeditor.fields import RichTextField
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.core.cache import caches
@@ -48,9 +49,14 @@ def message_post_save(sender, instance, **kwargs):
 class JournalArticle(models.Model):
     title = models.CharField(max_length=100, blank=True, null=True)
 
-    text = models.TextField(null=True, blank=True)
+    content = RichTextField(blank=True, null=True)
+
+    image = models.ImageField(null=True, blank=True)
 
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
+
+    def __str__(self):
+        return self.title
 
 @receiver(post_save, sender=Message)
 def message_post_save(sender, instance, **kwargs):

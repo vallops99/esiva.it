@@ -5,7 +5,8 @@ ENV UPDATED 20210607
 
 WORKDIR /usr/src/app/
 
-RUN apk add --update yarn postgresql-libs gcc musl-dev postgresql-dev
+RUN apk add --update yarn postgresql-libs gcc musl-dev postgresql-dev \
+    libffi-dev zlib-dev jpeg-dev
 
 COPY requirements.txt .
 RUN pip install --upgrade pip
