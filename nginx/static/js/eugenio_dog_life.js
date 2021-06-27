@@ -1,6 +1,12 @@
+'use strict';
+
 let registrationTime = 0;
 
-function showTimes() {
+function showTimes(init = false) {
+  if (init) {
+    $('.dog-life-time-passed').html('00' + ':' + '00');
+    return;
+  }
   registrationTime += 1;
   let seconds = normalizeTime(registrationTime % 60);
   let minutes = normalizeTime(parseInt(registrationTime / 60));
@@ -16,11 +22,34 @@ function normalizeTime(val) {
   }
 }
 
-(function() {
+function checkAudioAvailability() {
+  if (typeof MediaRecorder === 'undefined') {
+    $('.dog-life-mic svg').addClass('audio-not-supported');
+    $('.dog-life-error').html('Il tuo browser non supporta la registrazione audio, perfavore carica il file manualmente').removeClass('d-none');
+
+    return false;
+  }
+
+  return true;
+}
+
+function resetAudio() {
+  $('.dog-life-time-passed').html('');
+  $('.dog-life-audio #audio-source').attr('src', '');
+  $('.dog-life-audio').addClass('d-none');
+  $('.dog-life-cancel').addClass('d-none');
+  $('.dog-life-send').addClass('d-none');
+  $('.dog-life-error').addClass('d-none');
+  $('.dog-life-mic svg').css('fill', 'black');
+  return true;
+}
+
+async function initAudioRecorder() {
+
   let isRegStarted = false;
+  let mediaRecorder = null;
   let intervalId;
-  let mediaRecorder;
-  let audio = null;
+  let isResetted = resetAudio();
 
   $('.dog-life-mic svg').on('click', function(e) {
     e.preventDefault();
@@ -30,21 +59,19 @@ function normalizeTime(val) {
 
     if (isRegStarted) {
       navigator.mediaDevices.getUserMedia({ audio: true })
-      .then(stream => {
-        mediaRecorder = new MediaRecorder(stream);
-
-        if (!audio) {
-          $('.dog-life-time-passed').html('');
-          $('.dog-life-cancel').addClass('d-none');
-          $('.dog-life-play').addClass('d-none');
-          $('.dog-life-pause').addClass('d-none');
-          $('.dog-life-send').addClass('d-none');
-          audio = null;
-          audioUrl = null;
-          audioBlob = null;
+      .then(function(stream) {
+        if (!isResetted) {
+          isResetted = resetAudio();
         }
 
+        isResetted = !isResetted;
+
+        mediaRecorder = new MediaRecorder(stream, {
+          mimeType: 'audio/webm; codecs=opus'
+        });
+
         $(e.target).css('fill', 'red');
+        showTimes(true);
         intervalId = setInterval(showTimes, 1000);
 
         mediaRecorder.start();
@@ -52,73 +79,90 @@ function normalizeTime(val) {
         const audioChunks = [];
         mediaRecorder.addEventListener("dataavailable", event => {
           audioChunks.push(event.data);
-        });
 
-        mediaRecorder.addEventListener("stop", () => {
-          const audioBlob = new Blob(audioChunks);
-          const audioUrl = URL.createObjectURL(audioBlob);
-
-          audio = new Audio(audioUrl);
-
-          $('.dog-life-cancel').removeClass('d-none');
-          $('.dog-life-send').removeClass('d-none');
-          $('.dog-life-play').removeClass('d-none')
-            .on('click', function(e) {
-              $(this).addClass('d-none');
-              $('.dog-life-pause').removeClass('d-none');
-
-              audio.play();
-
-              audio.addEventListener('ended', () => {
-                $(this).removeClass('d-none');
-                $('.dog-life-pause').addClass('d-none');
-              });
+          if (mediaRecorder.state === "inactive") {
+            const audioBlob = new Blob(audioChunks, {
+              type: 'audio/webm; codecs=opus',
             });
+            const audioUrl = URL.createObjectURL(audioBlob);
 
-            $('.dog-life-pause').on('click', function(e) {
-              audio.pause();
+            const eventToListen = ((window.isTouchDevice) ? 'touchend' : 'click');
 
-              $(this).addClass('d-none');
-              $('.dog-life-play').removeClass('d-none');
-            });
+            const audio = new Audio(audioUrl);
+
+            $('#audio-source').attr('src', audioUrl);
+            $('#audio-source-recovery').attr('src', audioUrl);
+            $('#dog-audio')[0].load();
+            $('.dog-life-audio').removeClass('d-none');
+
+            $('.dog-life-cancel').removeClass('d-none');
+            $('.dog-life-send').removeClass('d-none');
 
             $('.dog-life-cancel').on('click', function(e) {
+              e.preventDefault();
+
               audio.pause();
-              $(this).addClass('d-none');
-              $('.dog-life-send').addClass('d-none');
-              $('.dog-life-play').addClass('d-none');
-              $('.dog-life-pause').addClass('d-none');
-              $('.dog-life-time-passed').html('');
-              audio = null;
-              audioUrl = null;
-              audioBlob = null;
-              mediaRecorder = null;
+              isResetted = resetAudio();
             });
 
-            $('.dog-life-send').on('click', function() {
-              $.post("/api/store-audio", {
-                  audio: mediaRecorder.forceDownload(audioBlob, 'output.wav')
+            $('.dog-life-send').on('click', function(e) {
+              e.preventDefault();
+
+              const audioForm = new FormData();
+              audioForm.append('file', audioBlob, 'eugenio-audio.mp3');
+
+              $.ajax({
+                url: '/api/store-audio',
+                type: 'POST',
+                headers: {
+                  'X-CSRFToken': window.csrftoken
+                },
+                data: audioForm,
+                processData: false,
+                contentType: false,
+
+                success: function() {
+                  isResetted = resetAudio();
+                  $('#audioResponseModal').modal('show');
+                },
+                failure: function() {
+                  isResetted = resetAudio();
+                }
               });
-
-              $('.dog-life-play').addClass('d-none');
-              $('.dog-life-pause').addClass('d-none');
-              $('.dog-life-cancel').addClas('d-none');
-              $('.dog-life-send').addClass('d-none');
-              $('.dog-life-time-passed').html('');
-              audio = null;
-              audioUrl = null;
-              audioBlob = null;
-              mediaRecorder = null;
             });
+          }
         });
       });
 
     } else {
       mediaRecorder.stop();
 
-      $(e.target).css('fill', 'black');
       clearInterval(intervalId);
+      $(e.target).css('fill', 'black');
       registrationTime = 0;
     }
   });
+}
+
+function checkFileUpload() {
+  $('.dog-life-input-file').on('input', function(e) {
+    if (e.target.value) {
+      $('.dog-life-send-uploaded').prop('disabled', false);
+    } else {
+      $('.dog-life-send-uploaded').prop('disabled', true);
+    }
+  });
+}
+
+(function() {
+  if (window.openModalResponse === 'True') {
+    $('#audioResponseModal').modal('show');
+  }
+  const isAudioAvailable = checkAudioAvailability();
+
+  if (isAudioAvailable) {
+    initAudioRecorder();
+  }
+
+  checkFileUpload();
 })();

@@ -9,30 +9,45 @@
         {% include 'includes/svg/microphone.svg' %}
       </div>
       <p class="dog-life-time-passed text-center"></p>
+      <p class="dog-life-error d-none text-danger text-center"></p>
+      <div class="dog-life-audio text-center d-none">
+        <audio id="dog-audio" controls>
+          <source id="audio-source" src="" type="audio/wav"/>
+          <p>
+            Il tuo browser non suppporta gli audio.
+            Se vuoi riascoltarlo questo è il <a id='audio-source-recovery' href="">link al file</a>
+          </p>
+        </audio>
+      </div>
       <div class="dog-life-media-buttons w-100 d-flex justify-content-center mt-3">
-        <button type="button" class="btn btn-light d-none dog-life-play mr-3">Ascolta</button>
-        <button type="button" class="btn btn-light d-none dog-life-pause mr-3">Stop</button>
         <button type="button" class="btn btn-danger d-none dog-life-cancel mr-3">Elimina</button>
         <button type="button" class="btn btn-primary d-none dog-life-send">Invia Audio</button>
       </div>
     </div>
-    <div class="dog-life-separator">
+    <div class="dog-life-separator d-flex align-items-center">
       <h3>Oppure</h3>
     </div>
     <div class="dog-life-upload">
       <h3 class="pb-3 text-center">Carica un file audio che hai già registrato.</h3>
       <div class="dog-life-upload d-flex flex-column text-center mt-3">
-        <div class="dog-life-input-container">
-          <input type="file" id="myFile" name="filename" class="btn btn-primary">
-        </div>
-        <div class="dog-life-send-uploaded-container">
-          <button type="button" class="btn btn-primary dog-life-send-uploaded mt-3">Invia audio caricato</button>
-        </div>
+        <form method="POST" action="{% url 'store-file-audio' %}" enctype="multipart/form-data">
+          {% csrf_token %}
+          <div class="dog-life-input-container">
+            <input type="file" name="audiofile" class="btn btn-primary dog-life-input-file" accept='.wav,.mp3,.flac,.wma,.m4a,.aac'>
+          </div>
+          <div class="dog-life-send-uploaded-container">
+            <button type="submit" class="btn btn-primary dog-life-send-uploaded mt-3" disabled>Invia audio caricato</button>
+          </div>
+        </form>
       </div>
     </div>
   </div>
+  {% include 'includes/modals/audio_response.html' %}
 {% endblock %}
 
 {% block script %}
+  <script>
+    window.openModalResponse = '{{ open_modal }}';
+  </script>
   <script src="{% static 'js/eugenio_dog_life.js' %}"></script>
 {% endblock %}

@@ -64,3 +64,11 @@ class JournalArticle(models.Model):
 def message_post_save(sender, instance, **kwargs):
     caches['context-processor'].clear()
     caches['default'].clear()
+
+
+class Audio(models.Model):
+    file = models.FileField(blank=True, null=True)
+
+    downloaded = models.BooleanField(default=False)
+
+    created_at = models.DateTimeField(auto_now_add=True, editable=False)

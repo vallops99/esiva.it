@@ -1,3 +1,5 @@
+'use strict';
+
 function openModal() {
   const modal = $('#formResponseModal');
 

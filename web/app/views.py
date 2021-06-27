@@ -4,7 +4,10 @@ from django.views.decorators.cache import cache_page
 from django.contrib.auth.decorators import login_required
 from django.core.cache import cache
 from django.conf import settings
-from .models import Message, Location
+from .models import Message, Location, Audio
+from pydub import AudioSegment
+from io import BytesIO
+from django.core.files.base import File
 import json
 import uuid
 
@@ -39,9 +42,14 @@ def martesana_page(request):
     return HttpResponseBadRequest('Method not allowed')
 
 @cache_page(CACHE_TTL)
-def eugenio_dog_life(request):
+def eugenio_dog_life(request, message=None):
     if request.method == 'GET':
-        return render(request, 'pages/eugenio_dog_life.html', {})
+        open_modal = False
+        if message:
+            open_modal = True
+        return render(request, 'pages/eugenio_dog_life.html', {
+            'open_modal': open_modal
+        })
     return HttpResponseBadRequest('Method not allowed')
 
 @cache_page(CACHE_TTL)
@@ -87,20 +95,19 @@ def thought_board(request):
 
 def store_coordinates(request):
     if request.method == 'POST':
-        body = json.parse(request.body)
-        if body and 'content' in body:
-            content = body['content']
-            if 'latitude' in content and 'longitude' in content:
-                latitude = content['latitude']
-                longitude = content['longitude']
-                Location.objects.create(
-                    name='coordinate',
-                    slug=uuid.uuid4(),
-                    coordinate_x=latitude,
-                    coordinate_y=longitude
-                )
+        latitude = request.POST.get('latitude', None)
+        longitude = request.POST.get('longitude', None)
+        if latitude and longitude:
+            latitude = content['latitude']
+            longitude = content['longitude']
+            Location.objects.create(
+                name='coordinate',
+                slug=uuid.uuid4(),
+                coordinate_x=latitude,
+                coordinate_y=longitude
+            )
 
-                return HttpResponse('ok')
+            return HttpResponse('ok')
         return HttpResponseBadRequest('Something wrong happend or has been sent')
     return HttpResponseBadRequest('Method not allowed')
 
@@ -113,6 +120,30 @@ def invalidate_cache(request):
 
 def store_audio(request):
     if request.method == 'POST':
-        console.log(request.body)
-        return JsonResponse('ok')
+        audioFile = request.FILES.get('file', None)
+
+        if audioFile:
+            bytes_audio = BytesIO(audioFile.read())
+            audio = AudioSegment.from_file(bytes_audio, codec='opus')
+            wav = audio.export('people_file.wav', format='wav')
+
+            with open('people_file.wav', 'rb') as file:
+                Audio.objects.create(
+                    file = File(file)
+                )
+
+            return JsonResponse({'openModal': True})
+        return HttpResponseBadRequest('Somethings wrong happed with sending and retrieving the data')
+    return HttpResponseBadRequest('Method not allowed')
+
+def store_file_audio(request):
+    if request.method == 'POST':
+        file = request.FILES['audiofile']
+        if file:
+            Audio.objects.create(
+                file = file
+            )
+
+            return redirect('eugenio-dog-life-sent', message='sent')
+        return HttpResponseBadRequest('File not found')
     return HttpResponseBadRequest('Method not allowed')

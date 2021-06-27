@@ -1,26 +1,32 @@
 {% load static %}
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang='en'>
   <head>
     <title>E Si Va, pedalando</title>
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
 
-    <meta property="og:url" content="http://esiva.it"/>
-    <!-- <meta property="og:image" content="image"/> -->
-    <meta property="og:title" content="E si va, pedalando con Eugenio Cane"/>
-    <meta property="og:description" content="E si va, pedalando nell'avventura del maestro Bok e del suo fedele Eugenio Cane verso mete lontane"/>
+    <meta property='og:url' content='http://esiva.it'/>
+    <!-- <meta property='og:image' content='image'/> -->
+    <meta property='og:title' content='E si va, pedalando con Eugenio Cane'/>
+    <meta property='og:description' content='E si va, pedalando nell&#39;avventura del maestro Bok e del suo fedele Eugenio Cane verso mete lontane'/>
 
     <!-- LIBRARIES -->
-    <script src="{% static 'node_modules/jquery/dist/jquery.min.js' %}"></script>
-    <script src="{% static 'node_modules/bootstrap/dist/js/bootstrap.min.js' %}"></script>
+    <script src='{% static "node_modules/jquery/dist/jquery.min.js" %}'></script>
+    <script src='{% static "node_modules/bootstrap/dist/js/bootstrap.min.js" %}'></script>
+    <script>
+      window.isTouchDevice = (('ontouchstart' in window) ||
+             (navigator.maxTouchPoints > 0) ||
+             (navigator.msMaxTouchPoints > 0));
+      window.csrftoken = '{{ csrf_token }}';
+    </script>
 
     <!-- STYLES -->
-    <link rel="stylesheet" href="{% static 'node_modules/bootstrap/dist/css/bootstrap.min.css' %}"/>
-    <link rel="stylesheet" href="{% static 'node_modules/font-awesome/css/font-awesome.min.css' %}"/>
-    <link rel="stylesheet" href="{% static 'css/esiva.css' %}"/>
+    <link rel='stylesheet' href='{% static "node_modules/bootstrap/dist/css/bootstrap.min.css" %}'/>
+    <link rel='stylesheet' href='{% static "node_modules/font-awesome/css/font-awesome.min.css" %}'/>
+    <link rel='stylesheet' href='{% static "css/esiva.css" %}'/>
 
     {% block head %}
     {% endblock %}
@@ -28,7 +34,7 @@
     <!-- REMEMBER TO ADD GOOGLE ANALYTICS HERE -->
   </head>
 
-  <body class="d-flex flex-column">
+  <body class='d-flex flex-column'>
     {% csrf_token %}
 
     {% include 'includes/navbar.html' %}
@@ -43,4 +49,4 @@
 {% block script %}
 {% endblock %}
 
-<script src="{% static 'js/esiva.js' %}"></script>
+<script src='{% static "js/esiva.js" %}'></script>

@@ -27,7 +27,8 @@ from app.views import (
     partners,
     store_coordinates,
     invalidate_cache,
-    store_audio
+    store_audio,
+    store_file_audio
 )
 
 urlpatterns = [
@@ -40,6 +41,7 @@ urlpatterns = [
     path('martesana-racconta', martesana_page, name='martesana-page'),
 
     path('bacheca-pensieri', thought_board, name='thought-board'),
+    path('dai-vita-eugenio-cane/<str:message>', eugenio_dog_life, name='eugenio-dog-life-sent'),
     path('dai-vita-eugenio-cane', eugenio_dog_life, name='eugenio-dog-life'),
 
     path('donazioni', donation, name='donation'),
@@ -49,5 +51,6 @@ urlpatterns = [
     # API urls
     path('api/store-coordinates', store_coordinates, name='store-coordinates'),
     path('api/invalidate-cache', invalidate_cache, name='invalidate-cache'),
-    path('api/store-audio', store_audio, name='store-audio')
+    path('api/store-audio', store_audio, name='store-audio'),
+    path('api/store-file-audio', store_file_audio, name='store-file-audio')
 ]
