@@ -1,6 +1,6 @@
 from django.db import models
 from ckeditor.fields import RichTextField
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
 from django.core.cache import caches
 import datetime
@@ -23,9 +23,16 @@ class Location(models.Model):
 
 
 @receiver(post_save, sender=Location)
+@receiver(post_delete, sender=Location)
 def location_post_save(sender, instance, **kwargs):
-    caches['context-processor'].clear()
-    caches['default'].clear()
+    locations_key = 'esiva.it/locations'
+    road_key = 'esiva.it/roads'
+    live_point_key = 'esiva.it/live-point'
+    caches['context-processor'].delete_many([
+        locations_key,
+        road_key,
+        live_point_key
+    ])
 
 
 class Message(models.Model):

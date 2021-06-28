@@ -15,14 +15,6 @@
 {% block script %}
   <script>
     mapboxgl.accessToken = "{{ MAPBOX_TOKEN }}";
-    window.locations = JSON.parse('{{ LOCATIONS|safe }}');
-    window.road = JSON.parse('{{ ROAD|safe }}');
-    window.livePoint = JSON.parse('{{ LIVE_POINT|safe }}');
-    {% if only_bok %}
-      window.onlyBok = true;
-    {% else %}
-      window.onlyBok = false;
-    {% endif %}
   </script>
   <script src="{% static 'js/map.js' %}"></script>
 {% endblock %}

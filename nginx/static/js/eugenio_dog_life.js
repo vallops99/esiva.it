@@ -66,9 +66,7 @@ async function initAudioRecorder() {
 
         isResetted = !isResetted;
 
-        mediaRecorder = new MediaRecorder(stream, {
-          mimeType: 'audio/webm; codecs=opus'
-        });
+        mediaRecorder = new MediaRecorder(stream);
 
         $(e.target).css('fill', 'red');
         showTimes(true);
@@ -115,7 +113,7 @@ async function initAudioRecorder() {
                 url: '/api/store-audio',
                 type: 'POST',
                 headers: {
-                  'X-CSRFToken': window.csrftoken
+                  'X-CSRFToken': getCookie('csrftoken')
                 },
                 data: audioForm,
                 processData: false,
@@ -158,11 +156,11 @@ function checkFileUpload() {
   if (window.openModalResponse === 'True') {
     $('#audioResponseModal').modal('show');
   }
-  const isAudioAvailable = checkAudioAvailability();
+  // const isAudioAvailable = checkAudioAvailability();
 
-  if (isAudioAvailable) {
-    initAudioRecorder();
-  }
+  // if (isAudioAvailable) {
+  initAudioRecorder();
+  // }
 
   checkFileUpload();
 })();

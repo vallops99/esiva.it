@@ -178,4 +178,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CKEDITOR_BASEPATH = STATIC_URL + 'ckeditor/ckeditor/'
 
+BOK_GPS_TOKEN = 'TokenEugenio9386#!'
+
 from .app_settings import *

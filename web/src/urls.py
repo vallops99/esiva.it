@@ -17,7 +17,6 @@ from django.contrib import admin
 from django.urls import path
 from app.views import (
     homepage,
-    map,
     map_bok,
     martesana_page,
     thought_board,
@@ -26,6 +25,7 @@ from app.views import (
     about_me,
     partners,
     store_coordinates,
+    get_coordinates,
     invalidate_cache,
     store_audio,
     store_file_audio
@@ -35,7 +35,6 @@ urlpatterns = [
     path('5301fs/', admin.site.urls),
     path('', homepage, name='homepage'),
 
-    path('mappa', map, name='map'),
     path('dove-sei-bok', map_bok, name='map-bok'),
 
     path('martesana-racconta', martesana_page, name='martesana-page'),
@@ -50,6 +49,7 @@ urlpatterns = [
 
     # API urls
     path('api/store-coordinates', store_coordinates, name='store-coordinates'),
+    path('api/get-coordinates', get_coordinates, name='get-coordinates'),
     path('api/invalidate-cache', invalidate_cache, name='invalidate-cache'),
     path('api/store-audio', store_audio, name='store-audio'),
     path('api/store-file-audio', store_file_audio, name='store-file-audio')
