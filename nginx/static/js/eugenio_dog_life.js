@@ -156,6 +156,16 @@ function checkFileUpload() {
   if (window.openModalResponse === 'True') {
     $('#audioResponseModal').modal('show');
   }
+
+  if (!getCookie('eugenio-dog-info-opened')) {
+    $('#audioInfo').modal('show');
+    setCookie('eugenio-dog-info-opened', true, 1);
+  }
+
+  $('.dog-life-info-container').on('click', function() {
+    $('#audioInfo').modal('show');
+  });
+
   // const isAudioAvailable = checkAudioAvailability();
 
   // if (isAudioAvailable) {

@@ -1,5 +1,38 @@
 .board-page {
+  position: relative;
 
+  .message-container {
+    width: fit-content;
+    max-width: 80%;
+    min-width: 20%;
+    background-color: rgba(0, 123, 255, .7);
+    border-top-right-radius: 2rem;
+    border-bottom-right-radius: 2rem;
+
+    &.right-message {
+      background-color: rgba(0, 163, 255, .7);
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+      border-top-left-radius: 2rem;
+      border-bottom-left-radius: 2rem;
+    }
+  }
+
+  .board-page-info-container {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: fit-content;
+    height: fit-content;
+
+    svg {
+      fill: #007bff;
+    }
+
+    &:hover svg {
+      fill: #004bcf;
+    }
+  }
 }
 
 .create-message-container {

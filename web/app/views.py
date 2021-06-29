@@ -52,7 +52,7 @@ def donation(request):
 @cache_page(CACHE_TTL)
 def about_me(request):
     if request.method == 'GET':
-        return render(request, 'pages/homepage.html', {})
+        return render(request, 'pages/about_me.html', {})
     return HttpResponseBadRequest('Method not allowed')
 
 @cache_page(CACHE_TTL)
@@ -68,19 +68,28 @@ def thought_board(request):
     elif request.method == 'POST':
         message = request.POST.get('messageInput')
         username = request.POST.get('username')
-        email = request.POST.get('email')
-        board = request.POST.get('board')
+        age = request.POST.get('age')
 
-        if message and username and email:
-            Message.objects.create(
-                text=message,
-                user=username,
-                email=email
-            )
+        if message and username and age:
+            try:
+                Message.objects.create(
+                    text=message,
+                    user=username,
+                    age=age
+                )
+            except:
+                return render(request, 'pages/board.html', {
+                    'form_response': 'Ops.. Sembrerebbe che qualche campo sia mancante oppure non sia valido.',
+                    'error': True
+                })
             return render(request, 'pages/board.html', {
-                'form_response': 'Message sent'
+                'form_response': 'Il tuo messaggio è stato inviato, verrà revisionato il prima possibile, grazie!',
+                'error': False
             })
-        return HttpResponseBadRequest('One or more fields are missing or aren\'t allowed')
+        return render(request, 'pages/board.html', {
+            'form_response': 'Ops.. Sembrerebbe che qualche campo sia mancante oppure non sia valido.',
+            'error': True
+        })
 
     return HttpResponseBadRequest('Method not allowed')
 

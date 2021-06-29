@@ -7,8 +7,8 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
-        <p>Il tuo messaggio è stato inviato, verrà revisionato il prima possibile, grazie!</p>
+      <div class="modal-body {% if error %} text-danger {% endif %}">
+        <p>{{ form_response }}</p>
       </div>
     </div>
   </div>

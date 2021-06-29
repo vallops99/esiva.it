@@ -1,4 +1,5 @@
 .dog-life-container {
+  position: relative;
   min-height: 100vh;
 
   .dog-life-separator {
@@ -8,5 +9,21 @@
   .audio-not-supported {
     opacity: 0.2;
     pointer-events: none;
+  }
+}
+
+.dog-life-info-container {
+  position: absolute;
+  top: 60px;
+  right: 0;
+  width: fit-content;
+  height: fit-content;
+
+  svg {
+    fill: #007bff;
+  }
+
+  &:hover svg {
+    fill: #004bcf;
   }
 }

@@ -3,11 +3,16 @@
 {% load context_tags %}
 
 {% block content %}
-  <div class='container-fluid h-100 p-3 board-page'>
+  <div class='container-fluid h-100 pt-3 pl-0 pr-0 d-flex flex-column board-page'>
+    <div class="board-page-info-container mt-1 mr-3">
+      {% include 'includes/svg/info.svg' %}
+    </div>
     {% for message in THOUGHT_MESSAGES %}
-      <div class='message-container d-flex flex-column w-80
+      <div class='message-container d-flex flex-column w-80 p-3 mt-2
         {% if forloop.counter|divisibleby:2 %}
           align-items-end
+          align-self-end
+          right-message
         {% else %}
           align-items-start
         {% endif %}'>
@@ -15,7 +20,7 @@
           {{ message.text }}
         </div>
         <div class="font-weight-light pt-2">
-          {{ message.user }}
+          {{ message.user }} - {{ message.age }}
         </div>
       </div>
     {% endfor %}
@@ -23,6 +28,7 @@
   {% include 'includes/create_message.html' %}
 
   {% if form_response %}
-    {% include 'includes/modals/form_response.html' %}
+    {% include 'includes/modals/form_response.html' with message=form_response error=error %}
   {% endif %}
+  {% include 'includes/modals/board_info.html' %}
 {% endblock %}

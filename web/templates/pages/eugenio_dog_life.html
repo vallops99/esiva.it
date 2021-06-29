@@ -2,6 +2,9 @@
 {% load static %}
 
 {% block content %}
+  <div class="dog-life-info-container mt-1 mr-3">
+    {% include 'includes/svg/info.svg' %}
+  </div>
   <div class="container dog-life-container d-flex flex-column justify-content-around align-items-center">
     <div class="dog-life-register">
       <h3 class="pb-3 text-center">Clicca sull'icona per registrare un audio e nel prossimo video potresti essere te a dare voce ad Eugenio Cane!</h3>
@@ -43,6 +46,7 @@
     </div>
   </div>
   {% include 'includes/modals/audio_response.html' %}
+  {% include 'includes/modals/audio_info.html' %}
 {% endblock %}
 
 {% block script %}
