@@ -76,7 +76,7 @@ function createMap() {
   });
 
   if (vw < 980) {
-    map.dragPan.disable();
+    // map.dragPan.disable();
     map.zoom = 3;
   }
 }

@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="partners-container container d-flex justify-content-center align-items-center">
+  <div class="partners-image-container">
+    <img src="{% static 'images/annibale.jpeg' %}" class="partners-image"/>
+  </div>
+  <div class="partners-image-container">
+    <a href="http://www.gomarascabiciclette.it/" target="external" rel="noopener">
+      <img src="{% static 'images/gomarasca.jpeg' %}" class="partners-image"/>
+    </a>
+  </div>
+  <div class="partners-image-container">
+    <a href="http://www.melzoscuole.edu.it/" target="external" rel="noopener">
+      <img src="{% static 'images/icsUngaretti.jpeg' %}" class="partners-image"/>
+    </a>
+  </div>
+  <div class="partners-image-container">
+    <a href="https://primalamartesana.it/" target="external" rel="noopener">
+      <img src="{% static 'images/martesana.jpeg' %}" class="partners-image"/>
+    </a>
+  </div>
+  <div class="partners-image-container">
+    <a href="https://www.tuttoscuola.com/" target="external" rel="noopener">
+      <img src="{% static 'images/tuttoscuolacom.jpeg' %}" class="partners-image"/>
+    </a>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+  <div class="donation-container container">
+    <div class="donation-background">
+      <img src="{% static 'images/bikeworld.jpg' %}" class="donation-background-image"/>
+    </div>
+    <div class="donation-content-container d-flex flex-column justify-content-center">
+      <div class="donation-content p-3">
+        <h3> E SI VA...ad aiutare Eugenio Cane!</h3>
+        <br>
+        <p> Il viaggio intrapreso ha richiesto e richiederà molte spese per: </p>
+        <ul>
+          <li>la preparazione del viaggio in acquisti vari come il materiale tecnico, la tenda, il sacco a pelo, il drone, la manutenzione della bici, tasse del sito web e molto molto altro...;</li>
+          <li>nel cors...</li>
+        </ul>
+        <br>
+        <a href="https://gofund.me/15f736be">
+          <button type="button" class="btn btn-primary">Leggi di più e dona qui</button>
+        </a>
+      </div>
+    </div>
+  </div>
+{% endblock %}

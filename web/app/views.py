@@ -46,7 +46,7 @@ def eugenio_dog_life(request, message=None):
 @cache_page(CACHE_TTL)
 def donation(request):
     if request.method == 'GET':
-        return render(request, 'pages/homepage.html', {})
+        return render(request, 'pages/donation.html', {})
     return HttpResponseBadRequest('Method not allowed')
 
 @cache_page(CACHE_TTL)
@@ -58,7 +58,7 @@ def about_me(request):
 @cache_page(CACHE_TTL)
 def partners(request):
     if request.method == 'GET':
-        return render(request, 'pages/homepage.html', {})
+        return render(request, 'pages/partners.html', {})
     return HttpResponseBadRequest('Method not allowed')
 
 @cache_page(CACHE_TTL)
@@ -98,9 +98,8 @@ def store_coordinates(request):
     if request.method == 'POST':
         bok_token = getattr(settings, 'BOK_GPS_TOKEN', None)
         body_decoded = request.body.decode('utf-8')
-        print(body_decoded)
         body_splitted = body_decoded.split('&')
-        print(body_splitted)
+
         for data in body_splitted:
             data_splitted = data.split('=')
             if data_splitted[0] == 'longitude':
@@ -110,9 +109,6 @@ def store_coordinates(request):
             elif data_splitted[0] == 'token':
                 token = data_splitted[1]
 
-        print(latitude)
-        print(longitude)
-        print(token)
         if bok_token == token and latitude and longitude:
             Location.objects.create(
                 name='coordinate',

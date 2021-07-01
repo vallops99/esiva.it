@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.core.cache import caches
 import json
+import os
 
 from app.models import Location, Message, JournalArticle
 
@@ -66,5 +67,6 @@ def process_context(request):
         'LOCATIONS': locations,
         'ROAD': road,
         'THOUGHT_MESSAGES': thought_messages,
-        'ARTICLE': article
+        'ARTICLE': article,
+        'ISPROD': os.getenv('ISPROD', False)  in ['True', 'true']
     }
