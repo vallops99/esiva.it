@@ -15,6 +15,7 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
+      opacity: .5;
     }
   }
 
@@ -24,7 +25,16 @@
 
     .donation-content {
       height: fit-content;
-      background-color: rgba(255, 255, 255, 0.9);
+
+      h3 {
+        .font-32();
+        font-weight: 600;
+      }
+
+      p, ul {
+        .font-20();
+        font-weight: 500;
+      }
     }
   }
 }

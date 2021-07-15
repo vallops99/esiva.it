@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+  <div class="live-container">
+    <div class="background">
+      <img src="{% static 'images/background.jpg' %}" class="background-image"/>
+    </div>
+    <div class="contents">
+      {% if YOUTUBE_VIDEO %}
+        <iframe width="1020" height="630" src="https://www.youtube.com/embed/{{ YOUTUBE_VIDEO.video_id }}" title="{{ YOUTUBE_VIDEO.title }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      {% endif %}
+    </div>
+  </div>
+{% endblock %}

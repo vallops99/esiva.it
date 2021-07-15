@@ -24,6 +24,7 @@ from app.views import (
     donation,
     about_me,
     partners,
+    live_page,
     store_coordinates,
     get_coordinates,
     invalidate_cache,
@@ -46,6 +47,7 @@ urlpatterns = [
     path('donazioni', donation, name='donation'),
     path('about-me', about_me, name='about-me'),
     path('partners', partners, name='partners'),
+    path('live', live_page, name='live'),
 
     # API urls
     path('api/store-coordinates', store_coordinates, name='store-coordinates'),

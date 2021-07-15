@@ -53,6 +53,10 @@
 
     {% include 'includes/navbar.html' %}
 
+    {% if not no_live_button %}
+      {% include 'includes/watch_video.html' %}
+    {% endif %}
+
     {% block content %}
     {% endblock %}
 

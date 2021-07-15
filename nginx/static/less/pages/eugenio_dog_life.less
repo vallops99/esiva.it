@@ -4,28 +4,44 @@
 
   .dog-life-separator {
     min-height: 200px;
+
+    h3 {
+      .font-32();
+      font-weight: 600;
+    }
   }
 
   .audio-not-supported {
     opacity: 0.2;
     pointer-events: none;
   }
+
+  .dog-life-register h3 {
+    .font-32();
+    font-weight: 600;
+  }
+
+  .dog-life-upload h3 {
+    .font-32();
+    font-weight: 600;
+  }
 }
 
 .dog-life-info-container {
   position: absolute;
-  top: 60px;
-  right: 0;
+  top: @NAVBAR;
+  left: 0;
   width: fit-content;
   height: fit-content;
 
   z-index: 10;
 
   svg {
+    cursor: pointer;
     fill: #007bff;
-  }
 
-  &:hover svg {
-    fill: #004bcf;
+    &:hover {
+      fill: #004bcf;
+    }
   }
 }

@@ -1,6 +1,8 @@
 // out: ../css/esiva.css, compress: true
 
 @import 'commons.less';
+@import 'font.less';
+@import 'typography.less';
 
 html {
   width: 100%;
@@ -9,13 +11,15 @@ html {
 
   body {
     min-height: 100%;
+    margin-top: @NAVBAR;
+    font-family: Raleway;
 
     .navbar .navbar-brand {
       cursor: pointer;
     }
 
     #map {
-      height: ~'calc(100vh - 60px)';
+      height: ~'calc(100vh - @{NAVBAR})';
 
       .marker {
         background-image: url('/static/images/marker-icon.png');
@@ -48,6 +52,96 @@ html {
           object-fit: cover;
         }
       }
+    }
+
+    .watch-video-container {
+      position: absolute;
+      top: @NAVBAR;
+      right: 0;
+      margin: 10px;
+      z-index: 2;
+
+      a {
+        color: @WHITE;
+
+        @keyframes button_hover {
+          from {
+            height: 100px;
+            width: 100px;
+            margin: 0;
+          }
+
+          to {
+            height: 90px;
+            width: 90px;
+            margin: 5px;
+          }
+        }
+
+        .watch-video-button {
+          width: 100px;
+          height: 100px;
+
+          display: flex;
+          align-items: center;
+          text-align: center;
+
+          border-radius: 50%;
+          background-color: @AZURE;
+          animation-duration: .1s;
+          animation-name: button_hover;
+        }
+
+        &:hover {
+          text-decoration: none;
+
+          .watch-video-button {
+            width: 90px;
+            height: 90px;
+            margin: 5px;
+
+            background-color: @AZURE_D;
+          }
+        }
+      }
+    }
+
+    .live-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      height: ~'calc(100vh - @{NAVBAR})';
+    }
+
+    .contents {
+      position: relative;
+      z-index: 1;
+    }
+
+    .background {
+      position: fixed;
+      top: 56px;
+      left: 0;
+      width: 100%;
+      height: 100%;
+
+      .background-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        opacity: .5;
+      }
+    }
+
+    .bok-title {
+      .font-32();
+      font-weight: 600;
+    }
+
+    .bok-description {
+      .font-20();
+      font-weight: 500;
     }
   }
 }

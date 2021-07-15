@@ -3,14 +3,14 @@
 
 {% block content %}
   <div class="homepage-container">
-    <div class="background-image-container">
-      <img class="background-image" src="{% static 'images/background-world-map.jpeg' %}"/>
+    <div class="background">
+      <img class="background-image" src="{% static 'images/background.jpg' %}"/>
     </div>
     <div class="container d-flex flex-column justify-content-center align-items-center content-container">
-      <div class="content-title text-center p-3">
+      <div class="content-title bok-title text-center p-3">
         <h2>E SI VA!<br/>Pedalando con Eugenio Cane</h2>
       </div>
-      <div class="content-description text-center p-3">
+      <div class="content-description bok-description text-center p-3">
         E SI VA...PEDALANDO CON EUGENIO CANE!
         Da Melzo a Capo Nord in bici
         <br/>
@@ -23,7 +23,35 @@
         Io e il maestro Bok ci crediamo, e voi? Dai, forza, E Si VA!"
       </div>
 
-      <div class="content-quote text-center p-3 mb-3">
+      <div class="d-flex flex-column align-self-start bok-adventure-cta">
+        <div class="bok-adventure-title bok-title ml-3">
+          Segui Eugenio Cane nella sua avventura!
+        </div>
+        <div class="bok-adventure-description bok-description m-3">
+          Scopri le varie città che ha attraversato e dove si trova ogni giorno.
+        </div>
+        <div class="bok-adventure-button m-3">
+          <a href='{% url "map-bok" %}' class="btn btn-primary">
+            Vai alla Mappa
+          </a>
+        </div>
+      </div>
+
+      <div class="d-flex flex-column align-self-end bok-adventure-cta">
+        <div class="bok-adventure-title bok-title ml-3 text-right">
+          Aiuta Eugenio Cane a sostenere le spese del viaggio!
+        </div>
+        <div class="bok-adventure-description bok-description m-3 text-right">
+          Scopri di più sulla nostra raccolta fondi su GoFundMe.
+        </div>
+        <div class="bok-adventure-button mt-3">
+          <a href='https://gofund.me/15f736be' class="btn btn-primary">
+            GoFundMe
+          </a>
+        </div>
+      </div>
+
+      <div class="content-quote text-center mb-3">
         <q>Sì, tutto è possibile, perfino credere che possa esistere un mondo migliore!</q>
         <br/>
         <cite>Vasco Rossi</cite>

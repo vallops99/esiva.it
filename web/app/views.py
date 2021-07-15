@@ -23,7 +23,9 @@ def homepage(request):
 @cache_page(CACHE_TTL)
 def map_bok(request):
     if request.method == 'GET':
-        return render(request, 'pages/map.html', {})
+        return render(request, 'pages/map.html', {
+            'no_live_button': True
+        })
     return HttpResponseBadRequest('Method not allowed')
 
 @cache_page(CACHE_TTL)
@@ -58,7 +60,9 @@ def about_me(request):
 @cache_page(CACHE_TTL)
 def partners(request):
     if request.method == 'GET':
-        return render(request, 'pages/partners.html', {})
+        return render(request, 'pages/partners.html', {
+            'no_live_button': True
+        })
     return HttpResponseBadRequest('Method not allowed')
 
 @cache_page(CACHE_TTL)
@@ -92,6 +96,13 @@ def thought_board(request):
         })
 
     return HttpResponseBadRequest('Method not allowed')
+
+@cache_page(CACHE_TTL)
+def live_page(request):
+    if request.method == 'GET':
+        return render(request, 'pages/live.html', {
+            'no_live_button': True
+        })
 
 @csrf_exempt
 def store_coordinates(request):

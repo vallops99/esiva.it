@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django import forms
 from ckeditor.widgets import CKEditorWidget
-from .models import Location, Message, JournalArticle, Audio
+from .models import Location, Message, JournalArticle, Audio, YoutubeVideo
 
 class JournalArticleAdminForm(forms.ModelForm):
     content = forms.CharField(widget=CKEditorWidget())
@@ -16,3 +16,4 @@ admin.site.register(Location)
 admin.site.register(Message)
 admin.site.register(Audio)
 admin.site.register(JournalArticle, JournalArticleAdmin)
+admin.site.register(YoutubeVideo)

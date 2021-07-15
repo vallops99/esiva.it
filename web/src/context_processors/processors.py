@@ -1,9 +1,8 @@
 from django.conf import settings
 from django.core.cache import caches
 import json
-import os
 
-from app.models import Location, Message, JournalArticle
+from app.models import Location, Message, JournalArticle, YoutubeVideo
 
 def process_context(request):
 
@@ -61,6 +60,19 @@ def process_context(request):
 
         cache.set(article_key, article, timeout=cache_timeout)
 
+    youtube_video_key = 'esiva.it/youtube-video'
+    youtube_video = cache.get(youtube_video_key, None)
+    if youtube_video is None:
+        youtube_video = YoutubeVideo.objects.filter(
+            is_active=True
+        ).order_by('-created_at').values('video_id', 'title')
+
+        if len(youtube_video):
+            youtube_video = youtube_video[0]
+
+        cache.set(youtube_video, youtube_video_key, timeout=cache_timeout)
+
+
     return {
         'MAPBOX_TOKEN': settings.MAPBOX_TOKEN,
         'LIVE_POINT': live_point,
@@ -68,5 +80,6 @@ def process_context(request):
         'ROAD': road,
         'THOUGHT_MESSAGES': thought_messages,
         'ARTICLE': article,
-        'ISPROD': os.getenv('ISPROD', False)  in ['True', 'true']
+        'YOUTUBE_VIDEO': youtube_video,
+        'ISPROD': getattr(settings, 'ISPROD', False)
     }

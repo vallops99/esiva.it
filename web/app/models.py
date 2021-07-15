@@ -67,8 +67,8 @@ class JournalArticle(models.Model):
     def __str__(self):
         return self.title
 
-@receiver(post_save, sender=Message)
-def message_post_save(sender, instance, **kwargs):
+@receiver(post_save, sender=JournalArticle)
+def journal_article_post_save(sender, instance, **kwargs):
     caches['context-processor'].clear()
     caches['default'].clear()
 
@@ -79,3 +79,20 @@ class Audio(models.Model):
     downloaded = models.BooleanField(default=False)
 
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
+
+
+class YoutubeVideo(models.Model):
+    title = models.CharField(max_length=100, blank=True, null=True)
+    video_id = models.CharField(max_length=200, blank=True, null=True)
+
+    is_active = models.BooleanField(default=False)
+
+    created_at = models.DateTimeField(auto_now_add=True, editable=False)
+
+    def __str__(self):
+        return self.title;
+
+@receiver(post_save, sender=YoutubeVideo)
+def youtube_video_post_save(sender, instance, **kwargs):
+    caches['context-processor'].clear()
+    caches['default'].clear()
