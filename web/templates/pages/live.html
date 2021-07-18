@@ -10,6 +10,10 @@
     <div class="contents">
       {% if YOUTUBE_VIDEO %}
         <iframe width="1020" height="630" src="https://www.youtube.com/embed/{{ YOUTUBE_VIDEO.video_id }}" title="{{ YOUTUBE_VIDEO.title }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      {% else %}
+        <div class="bok-title p-3 text-center">
+          Al momento non siamo in live con Art Radio, torna prossimamente per assistere alla live!
+        </div>
       {% endif %}
     </div>
   </div>

@@ -68,7 +68,9 @@ def partners(request):
 @cache_page(CACHE_TTL)
 def thought_board(request):
     if request.method == 'GET':
-        return render(request, 'pages/board.html', {})
+        return render(request, 'pages/board.html', {
+            'no_live_button': True
+        })
     elif request.method == 'POST':
         message = request.POST.get('messageInput')
         username = request.POST.get('username')
@@ -84,15 +86,18 @@ def thought_board(request):
             except:
                 return render(request, 'pages/board.html', {
                     'form_response': 'Ops.. Sembrerebbe che qualche campo sia mancante oppure non sia valido.',
-                    'error': True
+                    'error': True,
+                    'no_live_button': True
                 })
             return render(request, 'pages/board.html', {
                 'form_response': 'Il tuo messaggio è stato inviato, verrà revisionato il prima possibile, grazie!',
-                'error': False
+                'error': False,
+                'no_live_button': True
             })
         return render(request, 'pages/board.html', {
             'form_response': 'Ops.. Sembrerebbe che qualche campo sia mancante oppure non sia valido.',
-            'error': True
+            'error': True,
+            'no_live_button': True
         })
 
     return HttpResponseBadRequest('Method not allowed')
