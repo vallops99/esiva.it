@@ -7,42 +7,80 @@
       <img class="background-image" src="{% static 'images/background.jpg' %}"/>
     </div>
     <div class="container d-flex flex-column justify-content-center align-items-center content-container">
-      <div class="content-title bok-title text-center p-3">
+      <div class="content-title bok-title text-center m-3 p-3">
         <h2>E SI VA!<br/>Pedalando con Eugenio Cane</h2>
       </div>
-      <div class="content-description bok-description text-center p-3">
-        E SI VA...PEDALANDO CON EUGENIO CANE!<br>
-        Da Melzo a Capo Nord in bici
-        <br/>
-        <br/>
+      <div class="content-description bok-description text-center p-3 mt-3 mb-3">
         Un viaggio ecosostenibile ai confini del mondo: 5000 chilometri e oltre 90.000 metri di dislivello, varcando i confini di Svizzera, Francia, Germania, Danimarca, Svezia e Norvegia.<br />
-        Un percorso sorprendente che attraversa il cuore dell'Europa tra fiumi, montagne, fiordi e città incantevoli, documentate dai bambini della scuola primaria.
+        Un percorso sorprendente che attraversa il cuore dell'Europa tra fiumi, montagne, fiordi e città incantevoli.
         <br/>
         <br/>
         Eugenio Cane ha un sogno: "se sono in grado di pedalare da Melzo oltre il Circolo Polare Artico, chiunque può usare la bicicletta anche solo per stare in città e respirare così un'aria più pulita!<br />
         Io e il maestro Bok ci crediamo, e voi? Dai, forza, E Si VA!"
       </div>
 
-      <div class="d-flex flex-column align-self-start bok-adventure-cta">
-        <div class="bok-adventure-title bok-title ml-3">
-          Segui Eugenio Cane nella sua avventura!
+      <div class="bok-line-divider"></div>
+
+      <div class="d-flex justify-content-center p-3 mt-3 mb-3">
+        <div class="bok-title text-center">
+          <h2>Come puoi seguire le mie avventure?</h2>
         </div>
-        <div class="bok-adventure-description bok-description m-3">
-          Scopri le varie città che ha attraversato e dove si trova ogni giorno.
+      </div>
+
+      <div class="d-flex flex-column align-self-start bok-adventure-cta mt-3 mb-3 pt-3 pb-3">
+        <div class="bok-adventure-title bok-title">
+          Su Instagram e su Facebook
         </div>
-        <div class="bok-adventure-button m-3">
-          <a href='{% url "map-bok" %}' class="btn btn-primary">
-            Vai alla Mappa
+        <div class="bok-adventure-description bok-description mt-3 mb-3">
+          Ogni giorno vi tengo aggiornati sugli ultimi avvenimenti
+        </div>
+        <div class="bok-adventure-button mb-3 mt-3 ml-0">
+          <a href='https://www.instagram.com/maestro_bok/' target="_blank">
+            {% include 'includes/svg/instagram.svg' %}
+          </a>
+          <a href='https://www.facebook.com/boc.46' target="_blank">
+            {% include 'includes/svg/facebook.svg' %}
           </a>
         </div>
       </div>
 
-      <div class="d-flex flex-column align-self-end bok-adventure-cta">
-        <div class="bok-adventure-title bok-title ml-3 text-right">
-          Aiuta Eugenio Cane a sostenere le spese del viaggio!
+      <div class="d-flex flex-column align-self-end bok-adventure-cta mt-3 mb-3 pt-3 pb-3">
+        <div class="bok-adventure-title bok-title text-right">
+          Su questo sito web e sul mio canale YouTube
         </div>
-        <div class="bok-adventure-description bok-description m-3 text-right">
-          Scopri di più sulla nostra raccolta fondi su GoFundMe.
+        <div class="bok-adventure-description bok-description mb-3 mt-3 text-right">
+          Tutti i giorni alle ore 13.30 per la DIRETTA TIME, dove vi racconto le ultime 24 ore trascorse e rispondo a tutte le vostre domande.
+        </div>
+        <div class="bok-adventure-button mt-3">
+          <a href='{% url "live" %}'>
+            {% include 'includes/svg/livestream.svg' %}
+          </a>
+          <a href='https://www.youtube.com/channel/UCYRh96N64WQp-F8BbFwD2yA' target="_blank">
+            {% include 'includes/svg/youtube.svg' %}
+          </a>
+        </div>
+      </div>
+
+      <div class="d-flex flex-column align-self-start bok-adventure-cta mt-3 mb-3 pt-3 pb-3">
+        <div class="bok-adventure-title bok-title">
+          Sulla pagina della live map
+        </div>
+        <div class="bok-adventure-description bok-description mb-3 mt-3">
+          Scopri le varie città che ha attraversato e dove si trova ogni giorno.
+        </div>
+        <div class="bok-adventure-button mb-3 mt-3 ml-0">
+          <a href='{% url "map-bok" %}'>
+            {% include 'includes/svg/map.svg' %}
+          </a>
+        </div>
+      </div>
+
+      <div class="d-flex flex-column align-self-end bok-adventure-cta mt-3 mb-3 pt-3 pb-3">
+        <div class="bok-adventure-title bok-title text-right">
+          Nel mentre, aiuta Eugenio Cane a sostenere le spese del viaggio!
+        </div>
+        <div class="bok-adventure-description bok-description mb-3 mt-3 text-right">
+          Scopri di più sulla nostra raccolta fondi GoFundMe.
         </div>
         <div class="bok-adventure-button mt-3">
           <a href='https://gofund.me/15f736be' class="btn btn-primary">
@@ -51,7 +89,14 @@
         </div>
       </div>
 
-      <div class="content-quote text-center mb-3">
+      <div class="d-flex justify-content-center mt-3 mb-3 pt-3 pb-3">
+        <div class="bok-description text-center">
+          E a settembre (quando tornerò dal viaggio) pubblicherò l'intero viaggio sul mio canale YouTube, day by day, con delle puntate integrali che mostreranno le mie avventure dall'alba al tramonto.<br />
+          Tali puntate saranno documentate dai bambini dell'Istituto Comprensivo Ungaretti di Melzo, i quali daranno una spiegazione dei luoghi che attraverserò e dei messaggi positivi sulla sostenibilità (in accordo con gli obiettivi dell'<a href='https://unric.org/it/agenda-2030/' target="external">Agenda 2030 dell'ONU</a>).
+        </div>
+      </div>
+
+      <div class="content-quote text-center m-3 p-3">
         <q>
           Sì, tutto è possibile,<br />
           perfino credere<br />

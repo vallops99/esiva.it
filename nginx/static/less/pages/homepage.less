@@ -22,21 +22,18 @@
     position: relative;
     min-height: ~'calc(100vh - @{NAVBAR})';
 
-    .content-title {
+    .bok-line-divider {
+      height: 1px;
       width: 100%;
+      border-bottom: 1px solid black;
+    }
 
+    .content-title {
       margin-top: 50px;
     }
 
-    .content-description {
-      width: 100%;
-
-      margin-top: 30px;
-      margin-bottom: @COMPONENT_SPACING;
-    }
-
     .bok-adventure-cta {
-      margin-top: @COMPONENT_SPACING;
+      max-width: 60%;
 
       .bok-adventure-title {
         .font-24();
@@ -45,12 +42,34 @@
       .bok-adventure-button {
         width: fit-content;
         margin-left: auto;
+
+        a:nth-child(2) {
+          margin-left: 20px;
+        }
+
+        svg {
+          width: 38px;
+          height: 38px;
+
+          &.youtube-svg {
+            width: 48px;
+            height: 48px;
+          }
+
+          path {
+            fill: @PRIMARY_BOOTSTRAP;
+          }
+        }
+
+        a:hover svg path {
+          fill: @PRIMARY_BOOTSTRAP_D;
+        }
       }
     }
 
     .content-quote {
       margin-top: @COMPONENT_SPACING;
-      .font-20();
+      .font-28();
 
       q {
         font-style: italic;

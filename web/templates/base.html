@@ -60,7 +60,9 @@
     {% block content %}
     {% endblock %}
 
-    {% include 'includes/footer.html' %}
+    {% if not no_footer %}
+      {% include 'includes/footer.html' %}
+    {% endif %}
   </body>
 </html>
 

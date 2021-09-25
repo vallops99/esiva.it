@@ -46,7 +46,7 @@ def process_context(request):
     thought_messages_key = 'esiva.it/thought-messages'
     thought_messages = cache.get(thought_messages_key, None)
     if thought_messages is None:
-        thought_messages = list(Message.objects.filter(is_reviewed=True).order_by('created_at').values())
+        thought_messages = list(Message.objects.filter().order_by('created_at').values())
 
         cache.set(thought_messages_key, thought_messages, timeout=cache_timeout)
 

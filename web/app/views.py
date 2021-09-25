@@ -69,7 +69,8 @@ def partners(request):
 def thought_board(request):
     if request.method == 'GET':
         return render(request, 'pages/board.html', {
-            'no_live_button': True
+            'no_live_button': True,
+            'no_footer': True
         })
     elif request.method == 'POST':
         message = request.POST.get('messageInput')
@@ -87,17 +88,20 @@ def thought_board(request):
                 return render(request, 'pages/board.html', {
                     'form_response': 'Ops.. Sembrerebbe che qualche campo sia mancante oppure non sia valido.',
                     'error': True,
-                    'no_live_button': True
+                    'no_live_button': True,
+                    'no_footer': True
                 })
             return render(request, 'pages/board.html', {
-                'form_response': 'Il tuo messaggio è stato inviato, verrà revisionato il prima possibile, grazie!',
+                'form_response': 'Il tuo messaggio è stato inviato, grazie!',
                 'error': False,
-                'no_live_button': True
+                'no_live_button': True,
+                'no_footer': True
             })
         return render(request, 'pages/board.html', {
             'form_response': 'Ops.. Sembrerebbe che qualche campo sia mancante oppure non sia valido.',
             'error': True,
-            'no_live_button': True
+            'no_live_button': True,
+            'no_footer': True
         })
 
     return HttpResponseBadRequest('Method not allowed')
