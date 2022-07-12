@@ -1,7 +1,19 @@
 # esiva.it
 
-Access DB through docker exec:
+## Requirements
+Docker installed and running.
 
-1) su postgres
-2) psql
-3) exec any functionality
+## Build repo
+`docker-compose build`
+Images and dockerfiles will take care of DB creation, requirements installation.
+
+### DB not created
+In case the DB has not been created you can access it through `docker exec -it postgres_1 /bin/sh`, then run:
+
+1) make sure the postgres container is up and running `docker-compose up postgres`;
+2) su postgres;
+3) psql;
+4) exec any functionality, eg. created new table and give your user privileges.
+
+## Run the project
+`docker-compose up`
