@@ -4,11 +4,11 @@
 Docker installed and running.
 
 ## Build repo
-`docker-compose build`
+`docker-compose build`<br>
 Images and dockerfiles will take care of DB creation, requirements installation.
 
 ### DB not created
-In case the DB has not been created you can access it through `docker exec -it postgres_1 /bin/sh`, then run:
+In case the DB has not been created you can access it through `docker exec -it postgres_1 /bin/sh`, then:
 
 1) make sure the postgres container is up and running `docker-compose up postgres`;
 2) su postgres;
